@@ -1,4 +1,4 @@
-from app.routes import home, dashboard
+from app.routes import home, dashboard, api
 from app.db import init_db
 from app.utils import filters
 
@@ -15,13 +15,10 @@ def create_app(test_config=None):
   app.jinja_env.filters['format_date'] = filters.format_date
   app.jinja_env.filters['format_plural'] = filters.format_plural
 
-  @app.route('/hello')
-  def hello():
-    return 'hellow world'
-
   # register routes
   app.register_blueprint(home)
   app.register_blueprint(dashboard)
+  app.register_blueprint(api)
 
   init_db(app)
 
